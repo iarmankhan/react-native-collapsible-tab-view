@@ -46,6 +46,7 @@ export const ScrollView = React.forwardRef<
       onContentSizeChange,
       children,
       refreshControl,
+      onMomentumScrollEnd,
       ...rest
     },
     passRef
@@ -126,7 +127,11 @@ export const ScrollView = React.forwardRef<
         automaticallyAdjustContentInsets={false}
         refreshControl={memoRefreshControl}
         // workaround for: https://github.com/software-mansion/react-native-reanimated/issues/2735
-        onMomentumScrollEnd={() => {}}
+        onMomentumScrollEnd={(e) => {
+          if(onMomentumScrollEnd){
+            onMomentumScrollEnd(e)
+          }
+        }}
       >
         {children}
       </ScrollViewMemo>
